@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Important Message 🚨</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .card {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 18px;
+      max-width: 380px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      animation: pop 0.6s ease;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    iframe {
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      border: none;
+    }
+    .footer {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 10px;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey <span id="name">you</span> 👀</h1>
+    <p>I saw this and immediately thought of you 😌</p>
+
+    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+    </iframe>
+
+    <p>Yeah… no escaping this 🎬</p>
+    <div class="footer">Sent with questionable intentions 💅</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    if (name) {
+      document.getElementById("name").textContent = name;
+    }
+  </script>
+
+</body>
+</html>
