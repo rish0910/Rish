@@ -1,144 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Important Question 👀</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Miggs 👀</title>
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
     body {
-      margin: 0;
+      background-color: #ffe6eb;
+      font-family: 'Arial', sans-serif;
       height: 100vh;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Arial", sans-serif;
-      overflow: hidden;
     }
 
-    .card {
-      background: white;
-      padding: 30px 25px;
-      border-radius: 20px;
+    .container {
       text-align: center;
-      width: 90%;
-      max-width: 360px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      max-width: 600px;
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 8px;
+      font-size: 48px;
+      color: #d6336c;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 15px;
-      margin-bottom: 20px;
-      color: #555;
+      font-size: 22px;
+      color: #6c757d;
+      min-height: 30px;
     }
 
     .buttons {
       position: relative;
-      height: 60px;
+      height: 220px;
+      margin-top: 30px;
     }
 
     button {
-      padding: 12px 20px;
-      font-size: 14px;
-      border-radius: 30px;
+      font-size: 20px;
+      padding: 15px 35px;
       border: none;
+      border-radius: 30px;
       cursor: pointer;
       position: absolute;
-      transition: all 0.3s ease;
+      transition: transform 0.2s;
     }
 
     #yes {
-      background: #ff4d6d;
+      background-color: #ff4d6d;
       color: white;
       left: 50%;
-      transform: translateX(-110%);
+      transform: translateX(-130%);
     }
 
     #no {
-      background: #ddd;
-      right: 50%;
-      transform: translateX(110%);
-    }
-
-    #no:hover {
-      transform: translateX(110%) translateY(-10px);
-    }
-
-    .confetti {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: red;
-      top: -10px;
-      animation: fall 3s linear infinite;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-
-    .final {
-      font-size: 18px;
-      margin-top: 15px;
-      color: #ff4d6d;
-      font-weight: bold;
+      background-color: #adb5bd;
+      color: white;
+      left: 50%;
+      transform: translateX(20%);
     }
   </style>
 </head>
 
 <body>
-
-  <div class="card" id="card">
-    <h1>Miggs… be serious 😐</h1>
-    <p>Will you be my Valentine? 💌</p>
+  <div class="container">
+    <h1>Miggs 👀<br>Will you be my Valentine? 💘</h1>
+    <p id="message"></p>
 
     <div class="buttons">
-      <button id="yes">YES 💖</button>
-      <button id="no">No 🙄</button>
+      <button id="yes" onclick="yesClicked()">Yes 💖</button>
+      <button id="no" onmouseover="moveNo()">No 💔</button>
     </div>
   </div>
 
   <script>
-    const yesBtn = document.getElementById("yes");
-    const noBtn = document.getElementById("no");
-    const card = document.getElementById("card");
+    const messages = [
+      "Nice try 😏",
+      "Wrong answer, Miggs.",
+      "Be serious.",
+      "You really thought you had a choice?",
+      "The audacity.",
+      "Try again 🤨",
+      "Embarrassing attempt.",
+      "This button is decorative only.",
+      "Absolutely not allowed."
+    ];
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 60 - 30;
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const msg = document.getElementById("message");
+
+      const x = Math.random() * 300 - 150;
+      const y = Math.random() * 180 - 90;
+
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
+      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+    }
 
-    yesBtn.addEventListener("click", () => {
-      card.innerHTML = `
-        <h1>Correct choice 😌💘</h1>
-        <p class="final">See you on Feb 14th ❤️</p>
+    function yesClicked() {
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          height:100vh;
+          background:#ffe6eb;
+          font-family:Arial;
+          text-align:center;
+          padding:20px;">
+          <h1 style="color:#d6336c;font-size:52px;">
+            I KNEW IT 😌💘<br><br>
+            Happy Valentine’s, Miggs 💕<br>
+            You made the right choice.<br><br>
+            See you on Feb 14th ❤️
+          </h1>
+        </div>
       `;
-      launchConfetti();
-    });
-
-    function launchConfetti() {
-      for (let i = 0; i < 80; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.background =
-          ["#ff4d6d", "#ffafcc", "#ffc8dd", "#bde0fe"][Math.floor(Math.random()*4)];
-        confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
-        document.body.appendChild(confetti);
-
-        setTimeout(() => confetti.remove(), 3000);
-      }
     }
   </script>
-
 </body>
 </html>
