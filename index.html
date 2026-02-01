@@ -2,74 +2,131 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Important Message 🚨</title>
+  <title>Mihir 👀</title>
+
+  <!-- Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     body {
-      margin: 0;
+      background-color: #ffe6eb;
+      font-family: 'Arial', sans-serif;
       height: 100vh;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .container {
       text-align: center;
+      max-width: 600px;
     }
-    .card {
-      background: white;
-      padding: 30px 25px;
-      border-radius: 18px;
-      max-width: 380px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      animation: pop 0.6s ease;
-    }
+
     h1 {
-      font-size: 24px;
+      font-size: 48px;
+      color: #d6336c;
       margin-bottom: 10px;
     }
+
     p {
-      font-size: 16px;
-      margin-bottom: 15px;
+      font-size: 22px;
+      color: #6c757d;
+      min-height: 30px;
     }
-    iframe {
-      width: 100%;
+
+    .buttons {
+      position: relative;
       height: 220px;
-      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 15px 35px;
       border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s;
     }
-    .footer {
-      font-size: 12px;
-      opacity: 0.6;
-      margin-top: 10px;
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-130%);
     }
-    @keyframes pop {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+
+    #no {
+      background-color: #adb5bd;
+      color: white;
+      left: 50%;
+      transform: translateX(20%);
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1>Mihir 👀<br>Will you be my Valentine? 💘</h1>
+    <p id="message"></p>
 
-  <div class="card">
-    <h1>Hey <span id="name">you</span> 👀</h1>
-    <p>I saw this and immediately thought of you 😌</p>
-
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-    </iframe>
-
-    <p>Yeah… no escaping this 🎬</p>
-    <div class="footer">Sent with questionable intentions 💅</div>
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes 💖</button>
+      <button id="no" onmouseover="moveNo()">No 💔</button>
+    </div>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
-    if (name) {
-      document.getElementById("name").textContent = name;
+    const messages = [
+      "Nice try 😏",
+      "Wrong answer, Mihir.",
+      "Be serious.",
+      "You really thought you had a choice?",
+      "The audacity.",
+      "Try again 🤨",
+      "Embarrassing attempt.",
+      "This button is decorative only.",
+      "Absolutely not allowed."
+    ];
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const msg = document.getElementById("message");
+
+      const x = Math.random() * 300 - 150;
+      const y = Math.random() * 180 - 90;
+
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      msg.textContent = messages[Math.floor(Math.random() * messages.length)];
+    }
+
+    function yesClicked() {
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.6 }
+      });
+
+      document.body.innerHTML = `
+        <div style="
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          height:100vh;
+          background:#ffe6eb;
+          font-family:Arial;
+          text-align:center;
+          padding:20px;">
+          <h1 style="color:#d6336c;font-size:52px;">
+            I KNEW IT 😌💘<br><br>
+            Happy Valentine’s, Mihir 💕<br>
+            You made the right choice.
+          </h1>
+        </div>
+      `;
     }
   </script>
-
 </body>
 </html>
